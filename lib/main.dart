@@ -18,8 +18,8 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Permission.microphone.request();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark));
   runApp(MyApp());
 }
 
