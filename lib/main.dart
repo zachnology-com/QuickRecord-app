@@ -296,13 +296,10 @@ class _SettingsPageState extends State<SettingsPage> {
           SizedBox(height: 90),
           InkWell(
             child: Text(
-              "Email Us",
+              "info@tech-reviews.zachnology.com",
               textAlign: TextAlign.center,
               style: TextStyle(),
             ),
-            onTap: () async {
-              Vibration.vibrate(duration: 50);
-            },
           ),
           SizedBox(height: 20),
           Row(
