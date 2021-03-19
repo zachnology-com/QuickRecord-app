@@ -298,14 +298,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             onTap: () async {
               Vibration.vibrate(duration: 50);
-              await widget.browser.open(
-                  url: "mailto:info@tech-reviews.zachnology.com",
-                  options: ChromeSafariBrowserClassOptions(
-                      android: AndroidChromeCustomTabsOptions(
-                        addDefaultShareMenuItem: true,
-                        showTitle: true,
-                      ),
-                      ios: IOSSafariOptions(barCollapsingEnabled: true)));
             },
           ),
           SizedBox(height: 20),
