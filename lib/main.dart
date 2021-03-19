@@ -18,8 +18,9 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Permission.microphone.request();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark));
+    statusBarColor: Colors.transparent,
+  ));
+
   runApp(MyApp());
 }
 
@@ -216,139 +217,141 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Image(
-                image: AssetImage('assets/zachnology.png'),
-                width: 130,
-              ),
-              Image(
-                image: AssetImage('assets/173012.png'),
-                width: 130,
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Text(
-            'Zachnology Tech Reviews QuickRecord',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: "ZachnologyEuclid",
-              fontSize: 25,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Image(
+                  image: AssetImage('assets/zachnology.png'),
+                  width: 130,
+                ),
+                Image(
+                  image: AssetImage('assets/173012.png'),
+                  width: 130,
+                ),
+              ],
             ),
-          ),
-          SizedBox(height: 40),
-          Text(
-            'Version ' + _projectVersion,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: "ZachnologyEuclid",
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 50),
-          OutlinedButton.icon(
-            onPressed: () {
-              Vibration.vibrate(duration: 50);
-              AppSettings.openAppSettings();
-            },
-            icon: Icon(EvaIcons.settings2Outline,
-                size: 18, color: Color(0xff24527a)),
-            label: Text(
-              "OPEN SETTINGS APP",
+            SizedBox(height: 10),
+            Text(
+              'Zachnology Tech Reviews QuickRecord',
+              textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xff24527a),
+                fontFamily: "ZachnologyEuclid",
+                fontSize: 25,
               ),
             ),
-          ),
-          SizedBox(height: 60),
-          Text(
-            'Help us promote our podcast:',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: "ROBOTO",
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 10),
-          OutlinedButton.icon(
-            onPressed: () {
-              Vibration.vibrate(duration: 50);
-              final RenderBox box = context.findRenderObject();
-              Share.share(
-                  "Hey, you should check out this awesome podcast called Zachnology Tech Reviews at https://tech-reviews.zachnology.com!",
-                  subject: "Awesome podcast!",
-                  sharePositionOrigin:
-                      box.localToGlobal(Offset.zero) & box.size);
-            },
-            icon: Icon(Icons.share, size: 18, color: Color(0xff24527a)),
-            label: Text(
-              "SHARE",
+            SizedBox(height: 40),
+            Text(
+              'Version ' + _projectVersion,
+              textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xff24527a),
+                fontFamily: "ZachnologyEuclid",
+                fontSize: 16,
               ),
             ),
-          ),
-          SizedBox(height: 90),
-          InkWell(
-            child: Text(
-              "info@tech-reviews.zachnology.com",
+            SizedBox(height: 50),
+            OutlinedButton.icon(
+              onPressed: () {
+                Vibration.vibrate(duration: 50);
+                AppSettings.openAppSettings();
+              },
+              icon: Icon(EvaIcons.settings2Outline,
+                  size: 18, color: Color(0xff24527a)),
+              label: Text(
+                "OPEN SETTINGS APP",
+                style: TextStyle(
+                  color: Color(0xff24527a),
+                ),
+              ),
+            ),
+            SizedBox(height: 60),
+            Text(
+              'Help us promote our podcast:',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "ROBOTO",
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 10),
+            OutlinedButton.icon(
+              onPressed: () {
+                Vibration.vibrate(duration: 50);
+                final RenderBox box = context.findRenderObject();
+                Share.share(
+                    "Hey, you should check out this awesome podcast called Zachnology Tech Reviews at https://tech-reviews.zachnology.com!",
+                    subject: "Awesome podcast!",
+                    sharePositionOrigin:
+                        box.localToGlobal(Offset.zero) & box.size);
+              },
+              icon: Icon(Icons.share, size: 18, color: Color(0xff24527a)),
+              label: Text(
+                "SHARE",
+                style: TextStyle(
+                  color: Color(0xff24527a),
+                ),
+              ),
+            ),
+            SizedBox(height: 90),
+            InkWell(
+              child: Text(
+                "info@tech-reviews.zachnology.com",
+                textAlign: TextAlign.center,
+                style: TextStyle(),
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                InkWell(
+                  child: Text(
+                    "Privacy Policy",
+                    style: TextStyle(),
+                  ),
+                  onTap: () async {
+                    Vibration.vibrate(duration: 50);
+                    await widget.browser.open(
+                        url:
+                            "https://zachnology-reviews.wixsite.com/site/privacy-policy",
+                        options: ChromeSafariBrowserClassOptions(
+                            android: AndroidChromeCustomTabsOptions(
+                              addDefaultShareMenuItem: true,
+                              showTitle: true,
+                            ),
+                            ios: IOSSafariOptions(barCollapsingEnabled: true)));
+                  },
+                ),
+                SizedBox(width: 20),
+                InkWell(
+                  child: Text(
+                    "Terms of Service",
+                    style: TextStyle(),
+                  ),
+                  onTap: () async {
+                    Vibration.vibrate(duration: 50);
+                    await widget.browser.open(
+                        url:
+                            "https://zachnology-reviews.wixsite.com/site/terms-of-service",
+                        options: ChromeSafariBrowserClassOptions(
+                            android: AndroidChromeCustomTabsOptions(
+                                addDefaultShareMenuItem: false),
+                            ios: IOSSafariOptions(barCollapsingEnabled: true)));
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Text(
+              "\u00a9 " + year + " Zachnology and 1730 12",
               textAlign: TextAlign.center,
               style: TextStyle(),
             ),
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              InkWell(
-                child: Text(
-                  "Privacy Policy",
-                  style: TextStyle(),
-                ),
-                onTap: () async {
-                  Vibration.vibrate(duration: 50);
-                  await widget.browser.open(
-                      url:
-                          "https://zachnology-reviews.wixsite.com/site/privacy-policy",
-                      options: ChromeSafariBrowserClassOptions(
-                          android: AndroidChromeCustomTabsOptions(
-                            addDefaultShareMenuItem: true,
-                            showTitle: true,
-                          ),
-                          ios: IOSSafariOptions(barCollapsingEnabled: true)));
-                },
-              ),
-              SizedBox(width: 20),
-              InkWell(
-                child: Text(
-                  "Terms of Service",
-                  style: TextStyle(),
-                ),
-                onTap: () async {
-                  Vibration.vibrate(duration: 50);
-                  await widget.browser.open(
-                      url:
-                          "https://zachnology-reviews.wixsite.com/site/terms-of-service",
-                      options: ChromeSafariBrowserClassOptions(
-                          android: AndroidChromeCustomTabsOptions(
-                              addDefaultShareMenuItem: false),
-                          ios: IOSSafariOptions(barCollapsingEnabled: true)));
-                },
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          Text(
-            "\u00a9 " + year + " Zachnology and 1730 12",
-            textAlign: TextAlign.center,
-            style: TextStyle(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
