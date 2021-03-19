@@ -9,6 +9,10 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:get_version/get_version.dart';
 import 'package:vibration/vibration.dart';
 import 'package:intl/intl.dart';
+import 'package:mailto/mailto.dart';
+// For Flutter applications, you'll most likely want to use
+// the url_launcher package.
+import 'package:url_launcher/url_launcher.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
