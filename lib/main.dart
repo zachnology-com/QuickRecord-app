@@ -13,6 +13,7 @@ import 'package:mailto/mailto.dart';
 // For Flutter applications, you'll most likely want to use
 // the url_launcher package.
 import 'package:url_launcher/url_launcher.dart';
+import 'package:quick_actions/quick_actions.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +48,32 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   InAppWebViewController _webViewController;
+
+  String shortcut = "no action set";
+
+  @override
+  void initState() {
+    super.initState();
+
+    final QuickActions quickActions = QuickActions();
+    quickActions.initialize((String shortcutType) {
+      setState(() {
+        if (shortcutType == "action_one") {}
+      });
+    });
+
+    quickActions.setShortcutItems(<ShortcutItem>[
+      // NOTE: This first action icon will only work on iOS.
+      // In a real world project keep the same file name for both platforms.
+      const ShortcutItem(
+          type: 'action_two', localizedTitle: 'Record', icon: 'ic_mic_outline'),
+    ]).then((value) {
+      setState(() {
+        shortcut = "actions ready";
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     InAppWebViewController _webViewController;
