@@ -1,0 +1,108 @@
+{
+  "project_info": {
+    "project_number": "819157436800",
+    "firebase_url": "https://zachnologytechreviews173012-default-rtdb.firebaseio.com",
+    "project_id": "zachnologytechreviews173012",
+    "storage_bucket": "zachnologytechreviews173012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819157436800:android:6fa4d42326163f69b65965",
+        "android_client_info": {
+          "package_name": "com.zachnology.techreviews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819157436800-3tja3t5ia1t2umcisdrcpo1a8p2k9k5g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zachnology.techreviews",
+            "certificate_hash": "0d69479d0e97bc2c879e9f74e4fe898e95a6576f"
+          }
+        },
+        {
+          "client_id": "819157436800-h1lvmpp73b55neitc3jksrpaktt03tl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zachnology.techreviews",
+            "certificate_hash": "c823691c7bc4413cac0d95715425f1a4e0828147"
+          }
+        },
+        {
+          "client_id": "819157436800-ti0tk2r1m6lum0c9v3a88j5586j1vaj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA_clSPgMEnZrHa5T-3WYYzKF2misWUB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819157436800-aufl5nie5s8f11fd1d63auivm1287j66.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819157436800-pjrflpboh8h331j0jg8itjf3906e02mp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zachnology.techreviews"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-8045278444692999~9562535761"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819157436800:android:e31d5c872d96cc88b65965",
+        "android_client_info": {
+          "package_name": "com.zachnology.techreviews.quickrecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819157436800-589prf9v2nlkd32skb4ptn30vn9f6h5h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zachnology.techreviews.quickrecord",
+            "certificate_hash": "c823691c7bc4413cac0d95715425f1a4e0828147"
+          }
+        },
+        {
+          "client_id": "819157436800-ti0tk2r1m6lum0c9v3a88j5586j1vaj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA_clSPgMEnZrHa5T-3WYYzKF2misWUB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819157436800-aufl5nie5s8f11fd1d63auivm1287j66.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819157436800-pjrflpboh8h331j0jg8itjf3906e02mp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zachnology.techreviews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
