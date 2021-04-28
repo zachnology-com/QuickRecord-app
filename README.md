@@ -15,9 +15,12 @@
 
 ## Install
 
-```sh
-npm install
-```
+To install the QuickRecord app, head to the install page on our website by clicking [here](https://zachnology-reviews.wixsite.com/site/installing-our-app).<br>
+If you need assistance, please contact us <br>
+
+## Updating
+
+We may sometimes release updates for the QuickRecord app. To update, visit the "Update" page on our website [here](https://zachnology-reviews.wixsite.com/site/apps-1)
 
 ## Author
 
@@ -37,7 +40,4 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2021 [Zachnology](https://github.com/zachnology-com).<br />
-This project is [LICENSE](https://github.com/zachnology-com/QuickRecord-app/blob/main/LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+This project is licensed under the CC0-1.0 License. [View it here](https://github.com/zachnology-com/QuickRecord-app/blob/main/LICENSE)
