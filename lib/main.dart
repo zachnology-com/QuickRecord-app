@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'QuickRecord',
       theme: ThemeData(
         primaryColor: Color(0xffffffff),
         accentColor: Color(0xff4BBFD4),
@@ -51,23 +51,23 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    final QuickActions quickActions = QuickActions();
-    quickActions.initialize((String shortcutType) {
-      setState(() {
-        if (shortcutType == "action_one") {}
-      });
-    });
-
-    quickActions.setShortcutItems(<ShortcutItem>[
-      // NOTE: This first action icon will only work on iOS.
-      // In a real world project keep the same file name for both platforms.
-      const ShortcutItem(
-          type: 'action_two', localizedTitle: 'Record', icon: 'ic_mic_outline'),
-    ]).then((value) {
-      setState(() {
-        shortcut = "actions ready";
-      });
-    });
+    // final QuickActions quickActions = QuickActions();
+    // quickActions.initialize((String shortcutType) {
+    //   setState(() {
+    //     if (shortcutType == "action_one") {}
+    //   });
+    // });
+    //
+    // quickActions.setShortcutItems(<ShortcutItem>[
+    //   // NOTE: This first action icon will only work on iOS.
+    //   // In a real world project keep the same file name for both platforms.
+    //   const ShortcutItem(
+    //       type: 'action_two', localizedTitle: 'Record', icon: 'ic_mic_outline'),
+    // ]).then((value) {
+    //   setState(() {
+    //     shortcut = "actions ready";
+    //   });
+    // });
   }
 
   @override
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.only(right: 20.0),
               child: InkWell(
                 onTap: () {
-                  Vibration.vibrate(duration: 50);
+                  Vibration.vibrate(duration: 10);
                   final RenderBox box = context.findRenderObject();
                   Share.share(
                       "Hey, you should check out this awesome podcast called Zachnology Tech Reviews at https://tech-reviews.zachnology.com!",
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: InkWell(
                 autofocus: true,
                 onTap: () {
-                  Vibration.vibrate(duration: 50);
+                  Vibration.vibrate(duration: 10);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SettingsPage()),
@@ -229,7 +229,7 @@ class _SettingsPageState extends State<SettingsPage> {
         leading: IconButton(
             icon: Icon(EvaIcons.arrowIosBackOutline, color: Colors.black),
             onPressed: () {
-              Vibration.vibrate(duration: 50);
+              Vibration.vibrate(duration: 10);
               Navigator.of(context).pop();
             }),
         title: Text(
@@ -278,7 +278,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(height: 50),
             OutlinedButton.icon(
               onPressed: () {
-                Vibration.vibrate(duration: 50);
+                Vibration.vibrate(duration: 10);
                 AppSettings.openAppSettings();
               },
               icon: Icon(EvaIcons.settings2Outline,
@@ -302,7 +302,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(height: 10),
             OutlinedButton.icon(
               onPressed: () {
-                Vibration.vibrate(duration: 50);
+                Vibration.vibrate(duration: 10);
                 final RenderBox box = context.findRenderObject();
                 Share.share(
                     "Hey, you should check out this awesome podcast called Zachnology Tech Reviews at https://tech-reviews.zachnology.com!",
@@ -336,7 +336,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(),
                   ),
                   onTap: () async {
-                    Vibration.vibrate(duration: 50);
+                    Vibration.vibrate(duration: 10);
                     await widget.browser.open(
                         url:
                             "https://zachnology-reviews.wixsite.com/site/privacy-policy",
@@ -355,7 +355,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(),
                   ),
                   onTap: () async {
-                    Vibration.vibrate(duration: 50);
+                    Vibration.vibrate(duration: 10);
                     await widget.browser.open(
                         url:
                             "https://zachnology-reviews.wixsite.com/site/terms-of-service",
@@ -403,7 +403,7 @@ class MyChromeSafariBrowser extends ChromeSafariBrowser {
 
   @override
   void onClosed() {
-    Vibration.vibrate(duration: 50);
+    Vibration.vibrate(duration: 10);
     print("ChromeSafari browser closed");
   }
 }
