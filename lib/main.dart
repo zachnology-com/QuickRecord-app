@@ -4,14 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
-// import 'package:share_plus/share_plus.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/services.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:get_version/get_version.dart';
 import 'package:vibration/vibration.dart';
 import 'package:intl/intl.dart';
-import 'package:quick_actions/quick_actions.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +22,6 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,36 +42,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  InAppWebViewController _webViewController;
-
   String shortcut = "no action set";
 
   @override
   void initState() {
     super.initState();
-
-    // final QuickActions quickActions = QuickActions();
-    // quickActions.initialize((String shortcutType) {
-    //   setState(() {
-    //     if (shortcutType == "action_one") {}
-    //   });
-    // });
-    //
-    // quickActions.setShortcutItems(<ShortcutItem>[
-    //   // NOTE: This first action icon will only work on iOS.
-    //   // In a real world project keep the same file name for both platforms.
-    //   const ShortcutItem(
-    //       type: 'action_two', localizedTitle: 'Record', icon: 'ic_mic_outline'),
-    // ]).then((value) {
-    //   setState(() {
-    //     shortcut = "actions ready";
-    //   });
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    InAppWebViewController _webViewController;
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         systemNavigationBarColor: Color(0xffE6E6E6),
@@ -147,9 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         debuggingEnabled: true,
                       ),
                     ),
-                    onWebViewCreated: (InAppWebViewController controller) {
-                      _webViewController = controller;
-                    },
+                    onWebViewCreated: (InAppWebViewController controller) {},
                     androidOnPermissionRequest:
                         (InAppWebViewController controller, String origin,
                             List<String> resources) async {
@@ -180,51 +154,13 @@ class _SettingsPageState extends State<SettingsPage> {
     initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await GetVersion.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
     String projectVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       projectVersion = await GetVersion.projectVersion;
     } on PlatformException {
       projectVersion = 'Failed to get project version.';
     }
-
-    String projectCode;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      projectCode = await GetVersion.projectCode;
-    } on PlatformException {
-      projectCode = 'Failed to get build number.';
-    }
-
-    String projectAppID;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      projectAppID = await GetVersion.appID;
-    } on PlatformException {
-      projectAppID = 'Failed to get app ID.';
-    }
-
-    String projectName;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      projectName = await GetVersion.appName;
-    } on PlatformException {
-      projectName = 'Failed to get app name.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
@@ -331,7 +267,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: InkWell(
                           onTap: () {
                             Vibration.vibrate(duration: 10);
-                            final RenderBox box = context.findRenderObject();
                             Share.share(
                               "Hey, you should check out this awesome podcast called Zachnology Tech Reviews at https://tech-reviews.zachnology.com!",
                               subject: "Awesome podcast!",
@@ -451,115 +386,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     ],
                   ),
                 ),
-                // SizedBox(height: 40),
-                // Text(
-                //   'Version ' + _projectVersion,
-                //   textAlign: TextAlign.center,
-                //   style: TextStyle(
-                //     fontFamily: "ZachnologyEuclid",
-                //     fontSize: 16,
-                //   ),
-                // ),
-                // SizedBox(height: 50),
-                // OutlinedButton.icon(
-                //   onPressed: () {
-                //     Vibration.vibrate(duration: 10);
-                //     AppSettings.openAppSettings();
-                //   },
-                //   icon: Icon(EvaIcons.settings2Outline,
-                //       size: 18, color: Color(0xff24527a)),
-                //   label: Text(
-                //     "OPEN SETTINGS APP",
-                //     style: TextStyle(
-                //       color: Color(0xff24527a),
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(height: 60),
-                // Text(
-                //   'Help us promote our podcast:',
-                //   textAlign: TextAlign.center,
-                //   style: TextStyle(
-                //     fontFamily: "ROBOTO",
-                //     fontSize: 16,
-                //   ),
-                // ),
-                // SizedBox(height: 10),
-                // OutlinedButton.icon(
-                //   onPressed: () {
-                //     Vibration.vibrate(duration: 10);
-                //     final RenderBox box = context.findRenderObject();
-                //     Share.share(
-                //         "Hey, you should check out this awesome podcast called Zachnology Tech Reviews at https://tech-reviews.zachnology.com!",
-                //         subject: "Awesome podcast!",
-                //         sharePositionOrigin:
-                //             box.localToGlobal(Offset.zero) & box.size);
-                //   },
-                //   icon: Icon(Icons.share, size: 18, color: Color(0xff24527a)),
-                //   label: Text(
-                //     "SHARE",
-                //     style: TextStyle(
-                //       color: Color(0xff24527a),
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(height: 90),
-                // InkWell(
-                //   child: Text(
-                //     "info@tech-reviews.zachnology.com",
-                //     textAlign: TextAlign.center,
-                //     style: TextStyle(),
-                //   ),
-                // ),
-                // SizedBox(height: 20),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: <Widget>[
-                //     InkWell(
-                //       child: Text(
-                //         "Privacy Policy",
-                //         style: TextStyle(),
-                //       ),
-                //       onTap: () async {
-                //         Vibration.vibrate(duration: 10);
-                //         await widget.browser.open(
-                //             url:
-                //                 "https://zachnology-reviews.wixsite.com/site/privacy-policy",
-                //             options: ChromeSafariBrowserClassOptions(
-                //                 android: AndroidChromeCustomTabsOptions(
-                //                   addDefaultShareMenuItem: true,
-                //                   showTitle: true,
-                //                 ),
-                //                 ios: IOSSafariOptions(
-                //                     barCollapsingEnabled: true)));
-                //       },
-                //     ),
-                //     SizedBox(width: 20),
-                //     InkWell(
-                //       child: Text(
-                //         "Terms of Service",
-                //         style: TextStyle(),
-                //       ),
-                //       onTap: () async {
-                //         Vibration.vibrate(duration: 10);
-                //         await widget.browser.open(
-                //             url:
-                //                 "https://zachnology-reviews.wixsite.com/site/terms-of-service",
-                //             options: ChromeSafariBrowserClassOptions(
-                //                 android: AndroidChromeCustomTabsOptions(
-                //                     addDefaultShareMenuItem: false),
-                //                 ios: IOSSafariOptions(
-                //                     barCollapsingEnabled: true)));
-                //       },
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: 20),
-                // Text(
-                //   "\u00a9 " + year + " Zachnology and 1730 12",
-                //   textAlign: TextAlign.center,
-                //   style: TextStyle(),
-                // ),
               ],
             ),
           ),
@@ -568,14 +394,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 }
-
-// onPressed: () async {
-// await widget.browser.open(
-// url: "https://flutter.dev/",
-// options: ChromeSafariBrowserClassOptions(
-// android: AndroidChromeCustomTabsOptions(addDefaultShareMenuItem: false),
-// ios: IOSSafariOptions(barCollapsingEnabled: true)));
-// },
 
 class MyChromeSafariBrowser extends ChromeSafariBrowser {
   MyChromeSafariBrowser(browserFallback) : super(bFallback: browserFallback);
@@ -617,36 +435,4 @@ class MyInAppBrowser extends InAppBrowser {
   void onExit() {
     print("\n\nBrowser closed!\n\n");
   }
-}
-
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => SettingsPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return child;
-    },
-  );
-}
-
-class FadeRoute extends PageRouteBuilder {
-  final Widget page;
-  FadeRoute({this.page})
-      : super(
-          pageBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-          ) =>
-              page,
-          transitionsBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            Widget child,
-          ) =>
-              FadeTransition(
-            opacity: animation,
-            child: child,
-          ),
-        );
 }
