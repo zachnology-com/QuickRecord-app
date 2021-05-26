@@ -279,7 +279,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Icons.share_outlined,
                               color: Color(0xff24527A),
                             ),
-                            title: Text('Help us promote our podcast'),
+                            title: Text('Share our podcast'),
                           ),
                         ),
                       ),
