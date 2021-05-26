@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -364,7 +366,18 @@ class _SettingsPageState extends State<SettingsPage> {
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0)),
-                          onTap: () {},
+                          onTap: () {
+                            Vibration.vibrate(duration: 10);
+                          },
+                          onLongPress: () async {
+                            Vibration.vibrate(duration: 50);
+                            await new Future.delayed(
+                                const Duration(seconds: 1));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EasterEgg()));
+                          },
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 3, horizontal: 30),
@@ -390,6 +403,83 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class EasterEgg extends StatefulWidget {
+  const EasterEgg({Key key}) : super(key: key);
+
+  @override
+  _EasterEggState createState() => _EasterEggState();
+}
+
+class _EasterEggState extends State<EasterEgg> {
+  @override
+  Widget build(BuildContext context) {
+    return AnnotatedRegion(
+      child: Scaffold(
+        backgroundColor: Color(0xffFFBE40),
+        body: Column(
+          children: <Widget>[
+            Image(
+              image: AssetImage('assets/todaynow.jpg'),
+            ),
+            SizedBox(height: 100),
+            Text(
+              'You found the TodayNOW! Easter Egg!!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "ZachnologyEuclid",
+                fontSize: 35,
+              ),
+            ),
+            SizedBox(height: 50),
+            Text(
+              "TodayNOW! is America's number one favorite news show!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(height: 30),
+            ElevatedButton.icon(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xffFEF546)),
+                ),
+                icon:
+                    Icon(EvaIcons.arrowIosBack, size: 26, color: Colors.black),
+                label: Text(
+                  'RETURN',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: () {
+                  Vibration.vibrate(duration: 10);
+                  Navigator.of(context).pop();
+                }),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          foregroundColor: Colors.black,
+          backgroundColor: Color(0xffFEF546),
+          onPressed: () {
+            Share.share(
+                'I just found the TodayNOW! easter egg in the Zachnology QuickRecord app! Try to figure out where it is!');
+          },
+          icon: Icon(
+            Icons.send_outlined,
+          ),
+          label: Text('SEND TO FRIENDS'),
+        ),
+      ),
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor: Color(0xffFFBE40),
+        systemNavigationBarDividerColor: Color(0xffFFBE40),
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
   }

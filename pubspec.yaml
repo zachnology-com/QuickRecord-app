@@ -32,4 +32,5 @@ flutter:
   assets:
     - assets/zachnology.png
     - assets/173012.png
+    - assets/todaynow.jpg
   uses-material-design: true
