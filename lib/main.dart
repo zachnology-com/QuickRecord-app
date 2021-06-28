@@ -39,6 +39,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  final ChromeSafariBrowser browser =
+      new MyChromeSafariBrowser(new MyInAppBrowser());
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -71,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             actions: <Widget>[
               Padding(
-                padding: EdgeInsets.only(right: 20.0),
+                padding: EdgeInsets.only(right: 10.0),
                 child: InkWell(
                   onTap: () {
                     Vibration.vibrate(duration: 10);
@@ -92,7 +94,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 20.0),
+                padding: EdgeInsets.only(right: 10.0),
+                child: InkWell(
+                  autofocus: true,
+                  onTap: () async {
+                    Vibration.vibrate(duration: 10);
+                    await widget.browser.open(
+                        url:
+                            "https://docs.google.com/forms/d/e/1FAIpQLSf8tDysOTOgDHWSqVlYwJv-1GnQebolUkyRtKnWfqpOXlT8wA/viewform?usp=sf_link",
+                        options: ChromeSafariBrowserClassOptions(
+                            android: AndroidChromeCustomTabsOptions(
+                              addDefaultShareMenuItem: true,
+                              showTitle: true,
+                            ),
+                            ios: IOSSafariOptions(barCollapsingEnabled: true)));
+                  },
+                  child: Container(
+                    width: 50,
+                    child: Icon(
+                      Icons.feedback_outlined,
+                      size: 26,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 10.0),
                 child: InkWell(
                   autofocus: true,
                   onTap: () {
