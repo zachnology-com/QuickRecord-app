@@ -1,7 +1,7 @@
 name: quickrecord
 description: The app for sending voice messages in to Zachnology Tech Reviews
 publish_to: 'none'
-version: 1.1.0
+version: 1.2.0
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -20,6 +20,7 @@ dependencies:
   mailto: ^1.1.0
   quick_actions: ^0.4.0+10
   cupertino_icons: ^1.0.0
+  url_launcher: ^6.0.7
 
 dev_dependencies:
   flutter_test:

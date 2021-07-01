@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,6 +10,8 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:get_version/get_version.dart';
 import 'package:vibration/vibration.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'animations.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +47,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String shortcut = "no action set";
-
   @override
   void initState() {
     super.initState();
@@ -124,10 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   autofocus: true,
                   onTap: () {
                     Vibration.vibrate(duration: 10);
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => SettingsPage()));
+                    Navigator.push(context, ScaleRoute(page: SettingsPage()));
                   },
                   child: Container(
                     width: 50,
@@ -183,6 +179,14 @@ class _SettingsPageState extends State<SettingsPage> {
     initPlatformState();
   }
 
+  launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   initPlatformState() async {
     String projectVersion;
     try {
@@ -228,31 +232,50 @@ class _SettingsPageState extends State<SettingsPage> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20),
+                SizedBox(height: 5),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(width: 35),
                     Image(
                       image: AssetImage('assets/zachnology.png'),
-                      width: 130,
+                      width: 90,
                     ),
-                    SizedBox(width: 30),
+                    SizedBox(width: 20),
                     Image(
                       image: AssetImage('assets/173012.png'),
-                      width: 130,
+                      width: 90,
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'Zachnology Tech Reviews QuickRecord',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "ZachnologyEuclid",
-                    fontSize: 25,
-                  ),
+                SizedBox(height: 5),
+                Row(
+                  children: <Widget>[
+                    SizedBox(width: 35),
+                    Text(
+                      'QuickRecord',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: "ZachnologyEuclid",
+                        fontSize: 27,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 55),
+                SizedBox(height: 5),
+                Row(
+                  children: <Widget>[
+                    SizedBox(width: 35),
+                    Text(
+                      'By Zachnology Tech Reviews',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: "Roboto",
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 42),
                 Scrollbar(
                   child: Column(
                     children: [
@@ -280,7 +303,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Icons.settings_outlined,
                               color: Color(0xff24527A),
                             ),
-                            title: Text('Open Settings App'),
+                            title: Text('Open Settings'),
                           ),
                         ),
                       ),
@@ -308,7 +331,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Icons.share_outlined,
                               color: Color(0xff24527A),
                             ),
-                            title: Text('Share our podcast'),
+                            title: Text('Share Podcast'),
                           ),
                         ),
                       ),
@@ -384,6 +407,40 @@ class _SettingsPageState extends State<SettingsPage> {
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0.0),
+                              topRight: Radius.circular(0.0)),
+                        ),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                        child: InkWell(
+                          onTap: () async {
+                            Vibration.vibrate(duration: 10);
+                            await widget.browser.open(
+                                url:
+                                    "https://zachnology-reviews.wixsite.com/site/updating-our-app",
+                                options: ChromeSafariBrowserClassOptions(
+                                    android: AndroidChromeCustomTabsOptions(
+                                      addDefaultShareMenuItem: true,
+                                      showTitle: true,
+                                    ),
+                                    ios: IOSSafariOptions(
+                                        barCollapsingEnabled: true)));
+                          },
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 30),
+                            leading: Icon(
+                              Icons.file_download_outlined,
+                              color: Color(0xff24527A),
+                            ),
+                            title: Text('Update App'),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0)),
                         ),
@@ -412,7 +469,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Icons.info_outlined,
                               color: Color(0xff24527A),
                             ),
-                            title: Text('App Version'),
+                            title: Text('Version'),
                             subtitle: Text(_projectVersion),
                           ),
                         ),
